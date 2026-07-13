@@ -30,7 +30,8 @@ class MovnavController extends Controller
 
     public function liked(){
         $movies = Movie::where('type', 'Movie')
-                        ->orderBy('likes', 'desc')
+                        ->withCount('likes')
+                        ->orderBy('likes_count', 'desc')
                         ->paginate(14);
         $trending = false;
         $popular = false;

@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Comment;
+use App\Models\User;
 
 
 class Movie extends Model
@@ -17,6 +18,11 @@ class Movie extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'movie_user')->withTimestamps();
     }
 
     protected $table = 'movies';

@@ -29,7 +29,8 @@ class TvnavController extends Controller
 
     public function liked(){
         $movies = Movie::where('type', 'TV-Series')
-                        ->orderBy('likes', 'desc')
+                        ->withCount('likes')
+                        ->orderBy('likes_count', 'desc')
                         ->paginate(14);
         $trending = false;
         $popular = false;

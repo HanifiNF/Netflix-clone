@@ -15,20 +15,22 @@ class MovieController extends Controller
     
     public function play($id)
     {
-        $movie = Movie::findOrFail($id);
+        $movie = Movie::withCount('likes')->findOrFail($id);
         $comments = $movie->comments()->latest()->take(5)->get();
         $showAll = false;
+        $userLiked = auth()->check() && $movie->likes()->where('user_id', auth()->id())->exists();
 
-        return view('play', compact('movie', 'comments', 'showAll'));
+        return view('play', compact('movie', 'comments', 'showAll', 'userLiked'));
     }
 
     public function playcommentall($id)
     {
-        $movie = Movie::findOrFail($id);
+        $movie = Movie::withCount('likes')->findOrFail($id);
         $comments = $movie->comments()->with('user')->latest()->take(20)->get();
         $showAll = true;
+        $userLiked = auth()->check() && $movie->likes()->where('user_id', auth()->id())->exists();
 
-        return view('play', compact('movie', 'comments', 'showAll'));
+        return view('play', compact('movie', 'comments', 'showAll', 'userLiked'));
     }
 
     public function storeComment(Request $request, $movieId)
@@ -59,11 +61,16 @@ class MovieController extends Controller
     public function likeMovie($id)
     {
         $movie = Movie::find($id);
-        if ($movie) {
-            $movie->likes += 1;
-            $movie->save();
-            return response()->json(['likes' => $movie->likes], 200);
+        if (! $movie) {
+            return response()->json(['message' => 'Movie not found'], 404);
         }
-        return response()->json(['message' => 'Movie not found'], 404);
+
+        $attached = $movie->likes()->toggle([auth()->id()]);
+        $liked = ! empty($attached['attached']);
+
+        return response()->json([
+            'liked' => $liked,
+            'likes' => $movie->likes()->count(),
+        ], 200);
     }
 }

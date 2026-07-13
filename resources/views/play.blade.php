@@ -41,8 +41,8 @@
                         <div class="row">
                             <div class="d-flex justify-content-center" style="min-height: 20vh;">
                                 <div class="d-flex flex-column justify-content-center">
-                                    <button class="btn btn-outline-light" id="like-button" style="max-width: 70px;">Like</button>
-                                    <p class="text-center mt-2" id="likes-count">{{ $movie->likes }} Likes</p>
+                                    <button class="btn btn-outline-light" id="like-button" style="max-width: 90px;">{{ $userLiked ? 'Unlike' : 'Like' }}</button>
+                                    <p class="text-center mt-2" id="likes-count">{{ $movie->likes_count }} Likes</p>
                                 </div>
                             </div>
                         </div>
@@ -125,6 +125,7 @@
                 },
                 success: function(response) {
                     $('#likes-count').text(response.likes + ' Likes');
+                    $('#like-button').text(response.liked ? 'Unlike' : 'Like');
                 },
                 error: function(response) {
                     alert('Error: ' + response.responseJSON.message);
