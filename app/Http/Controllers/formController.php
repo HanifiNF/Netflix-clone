@@ -51,20 +51,20 @@ class FormController extends Controller
         ]);
 
         // Handle image upload and store the path
+        $posterDbPath = null;
         if ($request->hasFile('poster')) {
-            $posterPath = $request->file('poster');
-            $extension = $posterPath->getClientOriginalExtension();
-            $postfilename = time().'.'.$extension;
-            $posterimgpath = 'uploads/poster/';
-            $posterPath->move($posterimgpath, $postfilename);
+            $poster = $request->file('poster');
+            $extension = $poster->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $posterDbPath = Storage::disk('public')->putFileAs('posters', $poster, $filename);
         }
 
+        $videoDbPath = null;
         if ($request->hasFile('video_path')) {
-            $videoPath = $request->file('video_path');
-            $extension = $videoPath->getClientOriginalExtension();
-            $vidfilename = time().'.'.$extension;
-            $vidpath = 'uploads/video/';
-            $videoPath->move($vidpath, $vidfilename);
+            $video = $request->file('video_path');
+            $extension = $video->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $videoDbPath = Storage::disk('public')->putFileAs('videos', $video, $filename);
         }
 
         Movie::create([
@@ -72,8 +72,8 @@ class FormController extends Controller
             'genre' => $request->genre,
             'year' => $request->year,
             'description' => $request->description,
-            'poster' => $posterimgpath.$postfilename,
-            'video_path' => $vidpath.$vidfilename,
+            'poster' => $posterDbPath,
+            'video_path' => $videoDbPath,
             'type' => $request->type,
             'trending' => $request->trending,
             'popular' => $request->popular,

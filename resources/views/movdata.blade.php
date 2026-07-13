@@ -34,7 +34,7 @@
                         <td>{{ $movie->created_at }}</td>
                         <td>{{ $movie->updated_at }}</td>
                         <td>
-                            <img class="foto" src="{{ asset($movie->poster) }}" alt="poster">
+                            <img class="foto" src="{{ $movie->poster_url }}" alt="poster">
                         </td>
                         <td>
                             <a href="{{ route('movie.edit', $movie->id) }}" class="btn btn-outline-primary mb-2">Edit</a>

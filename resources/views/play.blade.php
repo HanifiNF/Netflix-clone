@@ -6,7 +6,7 @@
             <div class="card-body text-light">
                 <div class="video-container border-bottom">
                     <video width="100%" controls>
-                        <source src="{{ asset($movie->video_path) }}" type="video/mp4">
+                        <source src="{{ $movie->video_url }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -15,7 +15,7 @@
                         <div class="container-fluid mw-100 border-end">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img src="{{ asset($movie->poster) }}" alt="Movie Poster" class="imgsize rounded img-responsive">
+                                    <img src="{{ $movie->poster_url }}" alt="Movie Poster" class="imgsize rounded img-responsive">
                                 </div>
                                 <div class="col-md-9 d-flex flex-column justify-content-between">
                                     <h1 class="movie-title ms-3">{{ $movie->title }}</h1>

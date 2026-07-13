@@ -21,7 +21,7 @@
                         <div class="col-sm mt-2 d-flex flex-column justify-content-start">
                             <div class="container-fluid">
                                 <a href="{{ route('movie.play', $movie->id) }}">
-                                    <img src="{{ asset($movie->poster) }}" class="imgsize rounded darken-on-hover">
+                                    <img src="{{ $movie->poster_url }}" class="imgsize rounded darken-on-hover">
                                 </a>
                                 <div class="d-flex align-items-start text-start">
                                     <div class="details-section align-self-end">

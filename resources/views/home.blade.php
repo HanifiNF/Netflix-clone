@@ -52,7 +52,7 @@
                             <div class="container-sm">
                                 <a href="{{ route('movie.play', $movie->id) }}">
                                     <!-- Update the src attribute to use the correct path -->
-                                    <img src="{{ asset($movie->poster) }}" class="imgsize rounded darken-on-hover">
+                                    <img src="{{ $movie->poster_url }}" class="imgsize rounded darken-on-hover">
                                 </a>
                                 <div class="d-flex align-items-start text-start">
                                     <div class="details-section align-self-end">
@@ -94,7 +94,7 @@
                             <div class="container-sm">
                                 <a href="{{ route('movie.play', $movie->id) }}">
                                     <!-- Update the src attribute to use the correct path -->
-                                    <img src="{{ asset($movie->poster) }}" class="imgsize rounded darken-on-hover">
+                                    <img src="{{ $movie->poster_url }}" class="imgsize rounded darken-on-hover">
                                 </a>
                                 <div class="d-flex align-items-start text-start">
                                     <div class="details-section align-self-end">
@@ -136,7 +136,7 @@
                             <div class="container-sm">
                                 <a href="{{ route('movie.play', $movie->id) }}">
                                     <!-- Update the src attribute to use the correct path -->
-                                    <img src="{{ asset($movie->poster) }}" class="imgsize rounded darken-on-hover">
+                                    <img src="{{ $movie->poster_url }}" class="imgsize rounded darken-on-hover">
                                 </a>
                                 <div class="d-flex align-items-start text-start">
                                     <div class="details-section align-self-end">

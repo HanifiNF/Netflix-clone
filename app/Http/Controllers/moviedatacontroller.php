@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Storage;
 
 class MovieDataController extends Controller
 {
@@ -77,21 +78,17 @@ class MovieDataController extends Controller
         $movie = Movie::findOrFail($id);
 
         if ($request->hasFile('poster')) {
-            $posterPath = $request->file('poster');
-            $extension = $posterPath->getClientOriginalExtension();
-            $postfilename = time().'.'.$extension;
-            $posterimgpath = 'uploads/poster/';
-            $posterPath->move($posterimgpath, $postfilename);
-            $movie->poster = $posterimgpath.$postfilename;
+            $poster = $request->file('poster');
+            $extension = $poster->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $movie->poster = Storage::disk('public')->putFileAs('posters', $poster, $filename);
         }
 
         if ($request->hasFile('video_path')) {
-            $videoPath = $request->file('video_path');
-            $extension = $videoPath->getClientOriginalExtension();
-            $vidfilename = time().'.'.$extension;
-            $vidpath = 'uploads/video/';
-            $videoPath->move($vidpath, $vidfilename);
-            $movie->video_path = $vidpath.$vidfilename;
+            $video = $request->file('video_path');
+            $extension = $video->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $movie->video_path = Storage::disk('public')->putFileAs('videos', $video, $filename);
         }
 
         $movie->title = $request->title;
