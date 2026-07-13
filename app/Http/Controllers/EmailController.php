@@ -20,7 +20,7 @@ class EmailController extends Controller
         $user = Auth::user();
 
         try {
-            Mail::to('support@example.com')->send(new ContactEmail($message, $user->name, $user->email));
+            Mail::to(config('services.support_email'))->send(new ContactEmail($message, $user->name, $user->email));
             return view('success');
         } catch (\Exception $e) {
             return $e->getMessage();
