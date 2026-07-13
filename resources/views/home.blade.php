@@ -50,13 +50,13 @@
                     @foreach($sortedMovies->slice($start, $end - $start) as $movie)
                         <div class="col-sm mt-2 d-flex flex-column justify-content-start">
                             <div class="container-sm">
-                                <a href="{{ route('movie.play', $movie->title) }}">
+                                <a href="{{ route('movie.play', $movie->id) }}">
                                     <!-- Update the src attribute to use the correct path -->
                                     <img src="{{ asset($movie->poster) }}" class="imgsize rounded darken-on-hover">
                                 </a>
                                 <div class="d-flex align-items-start text-start">
                                     <div class="details-section align-self-end">
-                                        <a href="{{ route('movie.play', $movie->title) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a >
+                                        <a href="{{ route('movie.play', $movie->id) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a >
                                         <p class="fs-6 fst-italic mb-3 " style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
                                     </div>
                                 </div>
@@ -92,13 +92,13 @@
                     @foreach($movietype->slice($start, $end - $start) as $movie)
                         <div class="col-sm mt-2 d-flex flex-column justify-content-start">
                             <div class="container-sm">
-                                <a href="{{ route('movie.play', $movie->title) }}">
+                                <a href="{{ route('movie.play', $movie->id) }}">
                                     <!-- Update the src attribute to use the correct path -->
                                     <img src="{{ asset($movie->poster) }}" class="imgsize rounded darken-on-hover">
                                 </a>
                                 <div class="d-flex align-items-start text-start">
                                     <div class="details-section align-self-end">
-                                        <a href="{{ route('movie.play', $movie->title) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a >
+                                        <a href="{{ route('movie.play', $movie->id) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a >
                                         <p class="fs-6 fst-italic mb-3 " style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
                                     </div>
                                 </div>
@@ -134,13 +134,13 @@
                     @foreach($tv->slice($start, $end - $start) as $movie)
                         <div class="col-sm mt-2 d-flex flex-column justify-content-start">
                             <div class="container-sm">
-                                <a href="{{ route('movie.play', $movie->title) }}">
+                                <a href="{{ route('movie.play', $movie->id) }}">
                                     <!-- Update the src attribute to use the correct path -->
                                     <img src="{{ asset($movie->poster) }}" class="imgsize rounded darken-on-hover">
                                 </a>
                                 <div class="d-flex align-items-start text-start">
                                     <div class="details-section align-self-end">
-                                        <a href="{{ route('movie.play', $movie->title) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a >
+                                        <a href="{{ route('movie.play', $movie->id) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a >
                                         <p class="fs-6 fst-italic mb-3 " style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
                                     </div>
                                 </div>

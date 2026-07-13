@@ -92,11 +92,11 @@
                     @if(!$showAll)
                         <!-- Link to show all comments -->
                         <div class="text-center mt-3">
-                            <a href="{{ route('movie.comments.all', ['title' => $movie->title]) }}" class="btn btn-outline-light">Show More Comments</a>
+                            <a href="{{ route('movie.comments.all', ['id' => $movie->id]) }}" class="btn btn-outline-light">Show More Comments</a>
                         </div>
                     @else
                         <div class="text-center mt-3">
-                            <a href="{{ route('movie.play', ['title' => $movie->title]) }}" class="btn btn-outline-light">Show Less</a>
+                            <a href="{{ route('movie.play', ['id' => $movie->id]) }}" class="btn btn-outline-light">Show Less</a>
                         </div>
                     @endif
                 @endif

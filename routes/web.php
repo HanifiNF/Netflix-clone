@@ -41,11 +41,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/edit-profile', [UserController::class, 'edit'])->name('edit.profile');
     Route::post('/update-profile', [UserController::class, 'update'])->name('update.profile');
-    Route::get('/movies/{title}', [MovieController::class, 'play'])->name('movie.play');
-    Route::get('/movies/{id}', [MovieController::class, 'playid'])->name('movie.playid');
-    Route::get('/movies/{title}/comments', [MovieController::class, 'playcommentall'])->name('movie.comments.all');
+    Route::get('/movies/{id}', [MovieController::class, 'play'])->name('movie.play')->whereNumber('id');
+    Route::get('/movies/{id}/comments', [MovieController::class, 'playcommentall'])->name('movie.comments.all')->whereNumber('id');
 
-    Route::post('/movies/{title}/like', [MovieController::class, 'likeMovie'])->name('movies.like');
+    Route::post('/movies/{id}/like', [MovieController::class, 'likeMovie'])->name('movies.like')->whereNumber('id');
 
     Route::get('/about', [FooterController::class, 'about'])->name('about');
     
