@@ -10,6 +10,7 @@ use App\Http\Controllers\UserDataController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieDataController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MovnavController;
 use App\Http\Controllers\TvnavController;
 use App\Http\Controllers\EmailController;
@@ -69,6 +70,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/user-database', [UserDataController::class, 'index'])->name('database');
     Route::delete('/user/{id}', [UserDataController::class, 'destroy'])->name('user.delete');
     Route::get('/user/{id}/edit', [UserDataController::class, 'edit'])->name('user.edit');

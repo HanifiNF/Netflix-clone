@@ -119,6 +119,10 @@
                                         {{ __('Logout') }}
                                     </a>
                                     @if(auth()->check() && auth()->user()->admin)
+                                    <a class="dropdown-item text-white bg-dark" href="{{ route('admin.dashboard') }}">
+                                        <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                    </a>
+                                    <hr class="dropdown-divider bg-light">
                                     <a class="dropdown-item text-white bg-dark" href="{{ route('database') }}">
                                         Users Database
                                     </a>
