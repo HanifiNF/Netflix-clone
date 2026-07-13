@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\MovieController;
+use App\Models\Movie;
 
 class HomeController extends Controller
 {
@@ -22,17 +22,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(MovieController $movieController)
+    public function index()
     {
-        $movies = $movieController->index();
+        $sortedMovies = Movie::latest()->take(14)->get();
+        $movietype = Movie::where('type', 'Movie')->latest()->take(14)->get();
+        $tv = Movie::where('type', 'TV-Series')->latest()->take(14)->get();
+        $carouselMovies = Movie::where('id', 11)->get();
 
-        // Sort movies by creation date in descending order
-        $sortedMovies = $movies->sortByDesc('created_at');
-        $movietype = $movies->where('type', 'Movie')->sortByDesc('created_at');
-        $tv = $movies->where('type', 'TV-Series')->sortByDesc('created_at');
-        $carouselMovies = $movies->whereIn('id', [11]);
-
-        // Pass sorted movies to the view
         return view('home', compact('sortedMovies', 'movietype', 'tv', 'carouselMovies'));
     }
 }
