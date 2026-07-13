@@ -3,74 +3,53 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\User;
+use App\Models\User;
 
 class UserDataController extends Controller
 {
     public function index(Request $request)
     {
-        if (session('isAdmin')) 
-        {
-            $query = $request->input('search');
+        $query = $request->input('search');
 
-            $users = User::when($query, function ($q) use ($query){
-                $q->where('name', 'like', "%{$query}%");
-            })
-            ->orderBy('created_at', 'desc')
-            ->take(6) 
-            ->get();
-            return view('userdata', ['users' => $users, 'search' => $query]);
-        } else {
-            abort(403, 'Unauthorized');
-        }
+        $users = User::when($query, function ($q) use ($query){
+            $q->where('name', 'like', "%{$query}%");
+        })
+        ->orderBy('created_at', 'desc')
+        ->take(6)
+        ->get();
+
+        return view('userdata', ['users' => $users, 'search' => $query]);
     }
 
     public function destroy($id)
     {
-        if (session('isAdmin')) {
-            $user = User::findOrFail($id);
-            $user->delete();
-            return redirect()->back()->with('success', 'User deleted successfully.');
-        } else {
-            abort(403, 'Unauthorized');
-        }
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->back()->with('success', 'User deleted successfully.');
     }
-    
+
     public function edit($id)
     {
-        if (session('isAdmin')) {
-            $user = User::findOrFail($id);
-            return view('useredit', compact('user'));
-        } else {
-            abort(403, 'Unauthorized');
-        }
+        $user = User::findOrFail($id);
+        return view('useredit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
-        if (session('isAdmin')) {
-            $user = User::findOrFail($id);
-            
-            // Validate the request data
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email,'.$user->id,
-                'admin' => 'required|integer',
-                // Add more validation rules as needed
-            ]);
+        $user = User::findOrFail($id);
 
-            // Update the user's data
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->admin = $request->input('admin');
-            // Update other fields as needed
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'admin' => 'required|integer',
+        ]);
 
-            $user->save();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->admin = $request->input('admin');
 
-            return redirect()->route('user.edit', $user->id)->with('success', 'User updated successfully.');
-        } else {
-            abort(403, 'Unauthorized');
-        }
+        $user->save();
+
+        return redirect()->route('user.edit', $user->id)->with('success', 'User updated successfully.');
     }
-
 }

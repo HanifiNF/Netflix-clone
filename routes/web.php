@@ -68,10 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Contact/Sent', [EmailController::class, 'SendEmail'])->name('Contactsent');
 });
 
-Route::get('/form', [FormController::class, 'index'])->name('form');
-Route::post('/submit-form-and-redirect', [FormController::class, 'storeAndRedirect'])->name('submit.form');
-    
-Route::middleware(['admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/user-database', [UserDataController::class, 'index'])->name('database');
     Route::delete('/user/{id}', [UserDataController::class, 'destroy'])->name('user.delete');
     Route::get('/user/{id}/edit', [UserDataController::class, 'edit'])->name('user.edit');
@@ -82,11 +79,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/movies/{id}/edit', [MovieDataController::class, 'edit'])->name('movie.edit');
     Route::post('/movies/{id}', [MovieDataController::class, 'update'])->name('movie.update');
 
-
     Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.delete');
 
     Route::get('/movie-database/more', [MovieDataController::class, 'more'])->name('mov.showmore');
     Route::get('/movie-database/less', [MovieDataController::class, 'less'])->name('mov.showless');
+
+    Route::get('/form', [FormController::class, 'index'])->name('form');
+    Route::post('/submit-form-and-redirect', [FormController::class, 'storeAndRedirect'])->name('submit.form');
 });
 Route::post('/movies/{id}/comment', [MovieController::class, 'storeComment'])->name('movie.comment')->middleware('auth');
 

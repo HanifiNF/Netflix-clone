@@ -75,7 +75,7 @@
                     <div class="mt-2 text-white">
                         <p class="mb-0">{{ $comment->content }}</p>
                     </div>
-                    @if(session('isAdmin'))
+                    @if(auth()->check() && auth()->user()->admin)
                         <div class="text-end mt-2">
                             <form action="{{ route('comment.delete', $comment->id) }}" method="POST" class="d-inline">
                                 @csrf

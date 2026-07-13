@@ -118,7 +118,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    @if(session('isAdmin'))
+                                    @if(auth()->check() && auth()->user()->admin)
                                     <a class="dropdown-item text-white bg-dark" href="{{ route('database') }}">
                                         Users Database
                                     </a>

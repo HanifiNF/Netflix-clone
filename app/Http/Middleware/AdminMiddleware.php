@@ -3,15 +3,14 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 
 class AdminMiddleware
 {
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->admin == 1) {
-            session(['isAdmin' => true]);
-        } else {
-            session(['isAdmin' => false]);
+        if (!auth()->user() || !auth()->user()->admin) {
+            abort(403, 'Unauthorized.');
         }
 
         return $next($request);
