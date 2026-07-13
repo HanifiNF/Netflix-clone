@@ -38,38 +38,25 @@
                     <a href="{{route('recently')}}" class="text-light">Show More</a>
                 </div>
             </div>
-            @php
-                $moviesCount = $sortedMovies->count();
-            @endphp
-            @for ($i = 0; $i < min(2, ceil($moviesCount / 7)); $i++)
-                <div class="row text-white row-cols-auto">
-                    @php
-                        $start = $i * 7;
-                        $end = min(($i + 1) * 7, $moviesCount);
-                    @endphp
-                    @foreach($sortedMovies->slice($start, $end - $start) as $movie)
-                        <div class="col-sm mt-2 d-flex flex-column justify-content-start">
-                            <div class="container-sm">
-                                <a href="{{ route('movie.play', $movie->id) }}">
-                                    <!-- Update the src attribute to use the correct path -->
-                                    <img src="{{ $movie->poster_url }}" class="imgsize rounded darken-on-hover">
-                                </a>
-                                <div class="d-flex align-items-start text-start">
-                                    <div class="details-section align-self-end">
-                                        <a href="{{ route('movie.play', $movie->id) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a >
-                                        <p class="fs-6 fst-italic mb-3 " style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
-                                    </div>
+            @if($sortedMovies->isNotEmpty())
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 g-3 text-white">
+                    @foreach($sortedMovies as $movie)
+                        <div class="col">
+                            <a href="{{ route('movie.play', $movie->id) }}" class="text-decoration-none">
+                                <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}" class="imgsize rounded darken-on-hover">
+                                <div class="mt-2">
+                                    <span class="fs-6 d-block text-truncate link-light">{{ $movie->title }}</span>
+                                    <p class="fs-6 fst-italic mb-0 small" style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
-                    @if ($end - $start < 7)
-                        @for ($j = 0; $j < 7 - ($end - $start); $j++)
-                            <div class="col mt-5 mb-3"></div>
-                        @endfor
-                    @endif
                 </div>
-            @endfor
+            @else
+                <div class="row text-center text-white justify-content-center">
+                    <div class="col mt-5 mb-3"><h5>No movies found.</h5></div>
+                </div>
+            @endif
         </div>
         <div class="container-fluid">
             <div class="d-flex mt-5 ms-3 me-4">
@@ -80,38 +67,25 @@
                     <a href="{{route('movie')}}" class="text-light">Show More</a>
                 </div>
             </div>
-            @php
-                $moviesCount = $movietype->count();
-            @endphp
-            @for ($i = 0; $i < min(2, ceil($moviesCount / 7)); $i++)
-                <div class="row text-white row-cols-auto">
-                    @php
-                        $start = $i * 7;
-                        $end = min(($i + 1) * 7, $moviesCount);
-                    @endphp
-                    @foreach($movietype->slice($start, $end - $start) as $movie)
-                        <div class="col-sm mt-2 d-flex flex-column justify-content-start">
-                            <div class="container-sm">
-                                <a href="{{ route('movie.play', $movie->id) }}">
-                                    <!-- Update the src attribute to use the correct path -->
-                                    <img src="{{ $movie->poster_url }}" class="imgsize rounded darken-on-hover">
-                                </a>
-                                <div class="d-flex align-items-start text-start">
-                                    <div class="details-section align-self-end">
-                                        <a href="{{ route('movie.play', $movie->id) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a >
-                                        <p class="fs-6 fst-italic mb-3 " style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
-                                    </div>
+            @if($movietype->isNotEmpty())
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 g-3 text-white">
+                    @foreach($movietype as $movie)
+                        <div class="col">
+                            <a href="{{ route('movie.play', $movie->id) }}" class="text-decoration-none">
+                                <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}" class="imgsize rounded darken-on-hover">
+                                <div class="mt-2">
+                                    <span class="fs-6 d-block text-truncate link-light">{{ $movie->title }}</span>
+                                    <p class="fs-6 fst-italic mb-0 small" style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
-                    @if ($end - $start < 7)
-                        @for ($j = 0; $j < 7 - ($end - $start); $j++)
-                            <div class="col mt-5 mb-3"></div>
-                        @endfor
-                    @endif
                 </div>
-            @endfor
+            @else
+                <div class="row text-center text-white justify-content-center">
+                    <div class="col mt-5 mb-3"><h5>No movies found.</h5></div>
+                </div>
+            @endif
         </div>
         <div class="container-fluid">
             <div class="d-flex mt-5 ms-3 me-4">
@@ -122,38 +96,25 @@
                     <a href="{{route('tv')}}" class="text-light">Show More</a>
                 </div>
             </div>
-            @php
-                $moviesCount = $tv->count();
-            @endphp
-            @for ($i = 0; $i < min(2, ceil($moviesCount / 7)); $i++)
-                <div class="row text-white row-cols-auto">
-                    @php
-                        $start = $i * 7;
-                        $end = min(($i + 1) * 7, $moviesCount);
-                    @endphp
-                    @foreach($tv->slice($start, $end - $start) as $movie)
-                        <div class="col-sm mt-2 d-flex flex-column justify-content-start">
-                            <div class="container-sm">
-                                <a href="{{ route('movie.play', $movie->id) }}">
-                                    <!-- Update the src attribute to use the correct path -->
-                                    <img src="{{ $movie->poster_url }}" class="imgsize rounded darken-on-hover">
-                                </a>
-                                <div class="d-flex align-items-start text-start">
-                                    <div class="details-section align-self-end">
-                                        <a href="{{ route('movie.play', $movie->id) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a >
-                                        <p class="fs-6 fst-italic mb-3 " style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
-                                    </div>
+            @if($tv->isNotEmpty())
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 g-3 text-white">
+                    @foreach($tv as $movie)
+                        <div class="col">
+                            <a href="{{ route('movie.play', $movie->id) }}" class="text-decoration-none">
+                                <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}" class="imgsize rounded darken-on-hover">
+                                <div class="mt-2">
+                                    <span class="fs-6 d-block text-truncate link-light">{{ $movie->title }}</span>
+                                    <p class="fs-6 fst-italic mb-0 small" style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
-                    @if ($end - $start < 7)
-                        @for ($j = 0; $j < 7 - ($end - $start); $j++)
-                            <div class="col mt-5 mb-3"></div>
-                        @endfor
-                    @endif
                 </div>
-            @endfor
+            @else
+                <div class="row text-center text-white justify-content-center">
+                    <div class="col mt-5 mb-3"><h5>No movies found.</h5></div>
+                </div>
+            @endif
         </div>
 </section>
 

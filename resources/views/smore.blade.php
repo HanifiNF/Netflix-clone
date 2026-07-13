@@ -11,34 +11,20 @@
     @endif
 <div class="container-fluid">
     <div class="mx-5">
-        @php
-            $moviesCount = $movies->count();
-        @endphp
-        @if($moviesCount > 0)
-            @foreach($movies->chunk(7) as $chunkedMovies)
-                <div class="row text-white row-cols-auto">
-                    @foreach($chunkedMovies as $movie)
-                        <div class="col-sm mt-2 d-flex flex-column justify-content-start">
-                            <div class="container-fluid">
-                                <a href="{{ route('movie.play', $movie->id) }}">
-                                    <img src="{{ $movie->poster_url }}" class="imgsize rounded darken-on-hover">
-                                </a>
-                                <div class="d-flex align-items-start text-start">
-                                    <div class="details-section align-self-end">
-                                        <a href="{{ route('movie.play', $movie->id) }}" class="fs-6 mt-2 d-inline-block text-truncate link-light" style="max-width: 170px;">{{ $movie->title }}</a>
-                                        <p class="fs-6 fst-italic mb-3" style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
-                                    </div>
-                                </div>
+        @if($movies->isNotEmpty())
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 g-3 text-white">
+                @foreach($movies as $movie)
+                    <div class="col">
+                        <a href="{{ route('movie.play', $movie->id) }}" class="text-decoration-none">
+                            <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}" class="imgsize rounded darken-on-hover">
+                            <div class="mt-2">
+                                <span class="fs-6 d-block text-truncate link-light">{{ $movie->title }}</span>
+                                <p class="fs-6 fst-italic mb-0 small" style="color: #b3b1b1">{{ $movie->genre }} ({{ $movie->year }})</p>
                             </div>
-                        </div>
-                    @endforeach
-                    @if ($chunkedMovies->count() < 7)
-                        @for ($j = 0; $j < 7 - $chunkedMovies->count(); $j++)
-                            <div class="col mt-5 mb-3"></div>
-                        @endfor
-                    @endif
-                </div>
-            @endforeach
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         @else
             <div class="row text-center text-white justify-content-center">
                 <div class="col mt-5 mb-3">
