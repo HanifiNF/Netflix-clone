@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use illuminate\Support\Facades\File;
 
-class formController extends Controller
+class FormController extends Controller
 {
     public function index ()
     {

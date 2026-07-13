@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\commentController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FooterController;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\usercontroller;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MovieController;
-use App\Http\Controllers\userdatacontroller;
-use App\Http\Controllers\formController;
+use App\Http\Controllers\UserDataController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\GenreController;
-use App\Http\Controllers\moviedatacontroller;
+use App\Http\Controllers\MovieDataController;
 use App\Http\Controllers\MovnavController;
 use App\Http\Controllers\TvnavController;
 use App\Http\Controllers\EmailController;
@@ -39,8 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/movies', [SmoreController::class, 'movie'])->name('movie');
     Route::get('/tv-series', [SmoreController::class, 'tv'])->name('tv');
 
-    Route::get('/edit-profile', [usercontroller::class, 'edit'])->name('edit.profile');
-    Route::post('/update-profile', [usercontroller::class, 'update'])->name('update.profile');
+    Route::get('/edit-profile', [UserController::class, 'edit'])->name('edit.profile');
+    Route::post('/update-profile', [UserController::class, 'update'])->name('update.profile');
     Route::get('/movies/{title}', [MovieController::class, 'play'])->name('movie.play');
     Route::get('/movies/{id}', [MovieController::class, 'playid'])->name('movie.playid');
     Route::get('/movies/{title}/comments', [MovieController::class, 'playcommentall'])->name('movie.comments.all');
@@ -69,25 +69,25 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Contact/Sent', [EmailController::class, 'SendEmail'])->name('Contactsent');
 });
 
-Route::get('/form', [formController::class, 'index'])->name('form');
-Route::post('/submit-form-and-redirect', [formController::class, 'storeAndRedirect'])->name('submit.form');
+Route::get('/form', [FormController::class, 'index'])->name('form');
+Route::post('/submit-form-and-redirect', [FormController::class, 'storeAndRedirect'])->name('submit.form');
     
 Route::middleware(['admin'])->group(function () {
-    Route::get('/user-database', [userdatacontroller::class, 'index'])->name('database');
-    Route::delete('/user/{id}', [userdatacontroller::class, 'destroy'])->name('user.delete');
-    Route::get('/user/{id}/edit', [userdatacontroller::class, 'edit'])->name('user.edit');
-    Route::put('/user/{id}', [userdatacontroller::class, 'update'])->name('user.update');
+    Route::get('/user-database', [UserDataController::class, 'index'])->name('database');
+    Route::delete('/user/{id}', [UserDataController::class, 'destroy'])->name('user.delete');
+    Route::get('/user/{id}/edit', [UserDataController::class, 'edit'])->name('user.edit');
+    Route::put('/user/{id}', [UserDataController::class, 'update'])->name('user.update');
 
-    Route::get('/movie-database', [moviedatacontroller::class, 'index'])->name('movdatabase');
-    Route::delete('/movie/{id}', [moviedatacontroller::class, 'destroy'])->name('movie.delete');
-    Route::get('/movies/{id}/edit', [moviedataController::class, 'edit'])->name('movie.edit');
-    Route::post('/movies/{id}', [moviedataController::class, 'update'])->name('movie.update');
+    Route::get('/movie-database', [MovieDataController::class, 'index'])->name('movdatabase');
+    Route::delete('/movie/{id}', [MovieDataController::class, 'destroy'])->name('movie.delete');
+    Route::get('/movies/{id}/edit', [MovieDataController::class, 'edit'])->name('movie.edit');
+    Route::post('/movies/{id}', [MovieDataController::class, 'update'])->name('movie.update');
 
 
-    Route::delete('/comment/{id}', [commentController::class, 'destroy'])->name('comment.delete');
+    Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.delete');
 
-    Route::get('/movie-database/more', [moviedatacontroller::class, 'more'])->name('mov.showmore');
-    Route::get('/movie-database/less', [moviedatacontroller::class, 'less'])->name('mov.showless');
+    Route::get('/movie-database/more', [MovieDataController::class, 'more'])->name('mov.showmore');
+    Route::get('/movie-database/less', [MovieDataController::class, 'less'])->name('mov.showless');
 });
 Route::post('/movies/{id}/comment', [MovieController::class, 'storeComment'])->name('movie.comment')->middleware('auth');
 

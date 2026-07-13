@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 
-class moviedatacontroller extends Controller
+class MovieDataController extends Controller
 {
     public function index(Request $request)
     {

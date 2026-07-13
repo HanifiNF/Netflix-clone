@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 
 
-class commentController extends Controller{
+class CommentController extends Controller {
     public function destroy($id)
     {
         if (session('isAdmin')) {
