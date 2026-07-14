@@ -223,9 +223,3 @@ database/
 ## License
 
 This project is open-sourced under the MIT license.
-
-## Author
-
-**Your Name**
-
-- GitHub: [@HanifiNF](https://github.com/HanifiNF)
