@@ -37,6 +37,10 @@ class Movie extends Model
             return null;
         }
 
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
         if (str_starts_with($path, 'img/') || str_starts_with($path, 'uploads/')) {
             return asset($path);
         }
@@ -52,10 +56,23 @@ class Movie extends Model
             return null;
         }
 
+        if (str_starts_with($path, 'youtube:')) {
+            return 'https://www.youtube.com/embed/'.substr($path, 8);
+        }
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
         if (str_starts_with($path, 'img/') || str_starts_with($path, 'uploads/')) {
             return asset($path);
         }
 
         return asset('storage/'.$path);
+    }
+
+    public function isYoutubeVideo(): bool
+    {
+        return $this->video_path && str_starts_with($this->video_path, 'youtube:');
     }
 }

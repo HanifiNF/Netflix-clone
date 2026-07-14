@@ -24,9 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sortedMovies = Movie::latest()->take(14)->get();
-        $movietype = Movie::where('type', 'Movie')->latest()->take(14)->get();
-        $tv = Movie::where('type', 'TV-Series')->latest()->take(14)->get();
+        $sortedMovies = Movie::latest()->take(12)->get();
+        $movietype = Movie::where('type', 'Movie')->latest()->take(12)->get();
+        $tv = Movie::where('type', 'TV-Series')->latest()->take(12)->get();
         $carouselMovies = Movie::where('id', 11)->get();
 
         return view('home', compact('sortedMovies', 'movietype', 'tv', 'carouselMovies'));

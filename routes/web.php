@@ -11,6 +11,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieDataController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminMovieImportController;
 use App\Http\Controllers\MovnavController;
 use App\Http\Controllers\TvnavController;
 use App\Http\Controllers\EmailController;
@@ -88,6 +89,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/form', [FormController::class, 'index'])->name('form');
     Route::post('/submit-form-and-redirect', [FormController::class, 'storeAndRedirect'])->name('submit.form');
+
+    Route::get('/admin/import', [AdminMovieImportController::class, 'create'])->name('admin.import');
+    Route::post('/admin/import', [AdminMovieImportController::class, 'store']);
 });
 Route::post('/movies/{id}/comment', [MovieController::class, 'storeComment'])->name('movie.comment')->middleware('auth');
 

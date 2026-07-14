@@ -98,6 +98,10 @@
            class="nav-link @if(request()->routeIs('form')) active @endif">
             <i class="fas fa-upload"></i> Upload
         </a>
+        <a href="{{ route('admin.import') }}"
+           class="nav-link @if(request()->routeIs('admin.import')) active @endif">
+            <i class="fas fa-cloud-download-alt"></i> Import
+        </a>
 
         <div class="divider"></div>
 

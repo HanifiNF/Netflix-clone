@@ -50,7 +50,7 @@
     <h2 class="text-white mb-4" style="font-size:1.5rem; font-weight:600;">Management Tools</h2>
 
     <div class="row g-3">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <a href="{{ route('database') }}" class="tile-card">
                 <div class="tile-icon" style="background: rgba(0, 168, 255, 0.15); color:#00a8ff;">
                     <i class="fas fa-users-cog"></i>
@@ -60,7 +60,7 @@
                 <span class="btn-open">Open &rarr;</span>
             </a>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <a href="{{ route('movdatabase') }}" class="tile-card">
                 <div class="tile-icon" style="background: rgba(229, 9, 20, 0.15); color:#e50914;">
                     <i class="fas fa-film"></i>
@@ -70,13 +70,23 @@
                 <span class="btn-open">Open &rarr;</span>
             </a>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <a href="{{ route('form') }}" class="tile-card">
                 <div class="tile-icon" style="background: rgba(40, 167, 69, 0.15); color:#28a745;">
                     <i class="fas fa-upload"></i>
                 </div>
                 <h3>Upload Content</h3>
                 <p>Add a new movie or TV series with poster &amp; video file.</p>
+                <span class="btn-open">Open &rarr;</span>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ route('admin.import') }}" class="tile-card">
+                <div class="tile-icon" style="background: rgba(255, 193, 7, 0.15); color:#ffc107;">
+                    <i class="fas fa-cloud-download-alt"></i>
+                </div>
+                <h3>Import from TMDB</h3>
+                <p>Fetch metadata + YouTube trailer from The Movie Database.</p>
                 <span class="btn-open">Open &rarr;</span>
             </a>
         </div>

@@ -5,10 +5,24 @@
         <div class="card bg-dark">
             <div class="card-body text-light">
                 <div class="video-container border-bottom">
-                    <video width="100%" controls>
-                        <source src="{{ $movie->video_url }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    @if($movie->isYoutubeVideo())
+                        <div style="position:relative; padding-bottom:56.25%; height:0;">
+                            <iframe src="{{ $movie->video_url }}"
+                                    style="position:absolute; top:0; left:0; width:100%; height:100%;"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
+                        </div>
+                    @elseif($movie->video_url)
+                        <video width="100%" controls>
+                            <source src="{{ $movie->video_url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    @else
+                        <div class="d-flex align-items-center justify-content-center text-center text-muted" style="height:300px; background:#000;">
+                            <p class="mb-0">No video available yet.</p>
+                        </div>
+                    @endif
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-8">
